@@ -1,6 +1,6 @@
-package ru.mirea.zakirovakr.weathertracker.domain.repository;
+package ru.mirea.zakirovakr.domain.domain.repository;
 
-import ru.mirea.zakirovakr.weathertracker.domain.models.Weather;
+import ru.mirea.zakirovakr.domain.domain.models.Weather;
 
 public interface WeatherRepository {
     Weather getWeatherByCity(String city);

@@ -1,20 +1,26 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.android.library)
 }
 
 android {
-    namespace = "ru.mirea.zakirovakr.weathertracker"
+    namespace = "ru.mirea.zakirovakr.data"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "ru.mirea.zakirovakr.weathertracker"
         minSdk = 26
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+
+        // Добавляем для Room
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -33,15 +39,16 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
     implementation(project(":domain"))
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+
+    // Room для Java (правильные зависимости)
+    implementation("androidx.room:room-runtime:2.6.0")
+    annotationProcessor("androidx.room:room-compiler:2.6.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
 }

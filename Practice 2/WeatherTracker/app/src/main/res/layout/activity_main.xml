@@ -8,7 +8,21 @@
     android:background="#F5F5F5"
     tools:context=".presentation.MainActivity">
 
-    <!-- Поле ввода города -->
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Полная версия"
+        android:textColor="#0D4930"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
         android:id="@+id/editTextCity"
         android:layout_width="match_parent"
@@ -17,51 +31,51 @@
         android:background="@android:drawable/edit_text"
         android:textColorHint="#757575"
         android:layout_marginHorizontal="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
 
-    <!-- Кнопка для получения погоды -->
+
     <Button
         android:id="@+id/buttonGetWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#0D4930"
         android:text="Получить погоду"
-        android:backgroundTint="#673AB7"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/editTextCity"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextCity" />
 
-    <!-- Кнопка для сохранения города -->
+
     <Button
         android:id="@+id/buttonSaveCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#0D4930"
         android:text="Сохранить город"
-        android:backgroundTint="#673AB7"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/buttonGetWeather"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonGetWeather" />
 
-    <!-- Кнопка для анализа фото (тестовый вызов) -->
+
     <Button
         android:id="@+id/buttonRecognizeWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#0D4930"
         android:text="Анализ фото"
-        android:backgroundTint="#673AB7"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/buttonSaveCity"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonSaveCity" />
 
-    <!-- Поле для отображения результата -->
+
     <TextView
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
@@ -73,5 +87,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
+
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#FFAE00"
+        android:text="Выйти"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package ru.mirea.zakirovakr.weathertracker.presentation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,39 +15,46 @@ import ru.mirea.zakirovakr.domain.domain.models.Weather;
 import ru.mirea.zakirovakr.domain.domain.repository.UserRepository;
 import ru.mirea.zakirovakr.domain.domain.repository.WeatherRepository;
 import ru.mirea.zakirovakr.domain.domain.usecases.GetWeatherByCityUseCase;
-import ru.mirea.zakirovakr.domain.domain.usecases.RecognizeWeatherFromPhotoUseCase;
-import ru.mirea.zakirovakr.domain.domain.usecases.SaveFavoriteCityUseCase;
 import ru.mirea.zakirovakr.weathertracker.R;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private EditText editTextCity;
-    private TextView textViewResult;
-    private Button buttonLogout;
+    private TextView textViewResult, textViewAuthStatus;
+    private Button buttonGetWeather, buttonLogin, buttonLogout;
 
     private UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         userRepository = new UserRepositoryImpl(this);
 
         initViews();
         setupClickListeners();
+        checkAuthStatus();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkAuthStatus();
     }
 
     private void initViews() {
         editTextCity = findViewById(R.id.editTextCity);
         textViewResult = findViewById(R.id.textViewResult);
+        textViewAuthStatus = findViewById(R.id.textViewAuthStatus);
+        buttonGetWeather = findViewById(R.id.buttonGetWeather);
+        buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogout = findViewById(R.id.buttonLogout);
     }
 
     private void setupClickListeners() {
-        findViewById(R.id.buttonGetWeather).setOnClickListener(v -> getWeather());
-        findViewById(R.id.buttonSaveCity).setOnClickListener(v -> saveCity());
-        findViewById(R.id.buttonRecognizeWeather).setOnClickListener(v -> recognizeWeather());
+        buttonGetWeather.setOnClickListener(v -> getWeather());
+        buttonLogin.setOnClickListener(v -> navigateToLogin());
         buttonLogout.setOnClickListener(v -> logout());
     }
 
@@ -57,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textViewResult.setText("Загрузка погоды для " + city + "...");
-        findViewById(R.id.buttonGetWeather).setEnabled(false);
+        buttonGetWeather.setEnabled(false);
 
         userRepository.fetchWeatherData(city, new UserRepository.WeatherCallback() {
             @Override
             public void onSuccess(String weatherData) {
                 runOnUiThread(() -> {
                     textViewResult.setText(weatherData);
-                    findViewById(R.id.buttonGetWeather).setEnabled(true);
+                    buttonGetWeather.setEnabled(true);
                 });
             }
 
@@ -72,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onError(String errorMessage) {
                 runOnUiThread(() -> {
                     textViewResult.setText("Ошибка: " + errorMessage);
-                    findViewById(R.id.buttonGetWeather).setEnabled(true);
+                    buttonGetWeather.setEnabled(true);
 
                     WeatherRepository weatherRepository = new WeatherRepositoryImpl();
                     GetWeatherByCityUseCase getWeatherUseCase = new GetWeatherByCityUseCase(weatherRepository);
@@ -84,24 +93,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void saveCity() {
-        String city = editTextCity.getText().toString();
-        userRepository.saveFavoriteCity(city);
-        textViewResult.setText("Город " + city + " сохранен в избранное");
+    private void navigateToLogin() {
+        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 
-    private void recognizeWeather() {
-        WeatherRepository weatherRepository = new WeatherRepositoryImpl();
-        RecognizeWeatherFromPhotoUseCase recognizeWeatherUseCase = new RecognizeWeatherFromPhotoUseCase(weatherRepository);
-        String result = recognizeWeatherUseCase.execute();
-        textViewResult.setText(String.format("Анализ фото: %s", result));
+    private void navigateToMain() {
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void logout() {
         userRepository.logout();
+        checkAuthStatus();
+        textViewResult.setText("Вы вышли из системы");
+    }
 
-        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+    private void checkAuthStatus() {
+        boolean isLoggedIn = userRepository.isUserLoggedIn();
+
+        if (isLoggedIn) {
+            textViewAuthStatus.setText("Вы авторизованы");
+            buttonLogin.setVisibility(View.GONE);
+            buttonLogout.setVisibility(View.VISIBLE);
+            navigateToMain();
+        } else {
+            textViewAuthStatus.setText("Войдите, чтобы использовать все возможности приложения");
+            buttonLogin.setVisibility(View.VISIBLE);
+            buttonLogout.setVisibility(View.GONE);
+        }
     }
 }

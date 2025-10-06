@@ -1,4 +1,4 @@
-package ru.mirea.zakirovakr.weathertracker.domain.models;
+package ru.mirea.zakirovakr.domain.domain.models;
 
 public class Weather {
     private String city;

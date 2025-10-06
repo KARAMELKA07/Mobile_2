@@ -1,7 +1,7 @@
-package ru.mirea.zakirovakr.weathertracker.domain.usecases;
+package ru.mirea.zakirovakr.domain.domain.usecases;
 
-import ru.mirea.zakirovakr.weathertracker.domain.models.Weather;
-import ru.mirea.zakirovakr.weathertracker.domain.repository.WeatherRepository;
+import ru.mirea.zakirovakr.domain.domain.models.Weather;
+import ru.mirea.zakirovakr.domain.domain.repository.WeatherRepository;
 
 public class GetWeatherByCityUseCase {
     private final WeatherRepository weatherRepository;
