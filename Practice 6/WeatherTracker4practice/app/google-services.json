@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "280287469845",
+    "project_id": "weathertrackerzakirova",
+    "storage_bucket": "weathertrackerzakirova.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280287469845:android:222f9563b4f1f88c43491c",
+        "android_client_info": {
+          "package_name": "ru.mirea.zakirovakr.weathertracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqqG83t9TDqkezfAxFNE8TcJyHGDn_hMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

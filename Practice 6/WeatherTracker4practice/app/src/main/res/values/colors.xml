@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="wt_primary">#0D4930</color>
+    <color name="wt_on_primary">#FFFFFF</color>
+    <color name="wt_card">#CFEAE4</color>
+    <color name="wt_accent">#FFAE00</color>
+    <color name="wt_bg">#F5F5F5</color>
+
+</resources>
