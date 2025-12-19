@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Pr7" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Тёмная гамма -->
+        <item name="colorPrimary">#66BB6A</item>
+        <item name="colorPrimaryVariant">#2E7D32</item>
+        <item name="colorSecondary">#64B5F6</item>
+        <item name="colorSecondaryVariant">#1976D2</item>
+
+        <item name="colorOnPrimary">#0B1B0C</item>
+        <item name="colorOnSecondary">#0B1220</item>
+
+        <item name="android:windowBackground">#0F1115</item>
+        <item name="android:statusBarColor">#0B1B0C</item>
+        <item name="android:navigationBarColor">#0F1115</item>
+    </style>
+
+</resources>
